@@ -1,4 +1,4 @@
-//
+ //
 //  PrinterViewController.m
 //  SMRT Board V3
 //
@@ -52,6 +52,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [self ShowPrintData];
+    
+    
     if(self.currPeripheral && self.currPeripheral.state == CBPeripheralStateConnected){
         for(CBService*service in self.currPeripheral.services){
             //服务
@@ -135,35 +137,14 @@
     if(_db == nil){
         _db = [BoardDB new];
     }
-    //NSString*TestCode=@"1|1|T4|1|1||1|0.0|文件|1|0||吴三|3182887||533|淄博西冶街159号|吴玉婷|上海||闸北江场三路286号609室|1";
-    
-    
-   // QRCodeString = [NSMutableString stringWithFormat:@"1|1|T4|1|1||1|0.0|文件|1|0||吴三|3182887||533|淄博西冶街159号|吴玉婷|上海||闸北江场三路286号609室|1"];
-   // NSLog(@"QRCode Value : %@",QRCodeString);
+
     NSString *QRCodeString = [self GetQRCodeValue];
     NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
     NSData *contentData = [QRCodeString dataUsingEncoding:enc];
     
     int pL = (int)(contentData.length % 256 + 3);
     int pH = (int)(contentData.length / 256);
-    
-    /*
-     1b 40
-     1d 28 6b 03 00 31 43 03
-     1d 28 6b 03 00 31 45 30
-     1d 28 6b 06 00 31 50 30 41 42 43 
-     1b 61 01
-     1d 28 6b 03 00 31 52 30
-     1d 28 6b 03 00 31 51 30
-     */
-    
-    //    [escCmd addQRCodeSizewithpL:3 withpH:0 withcn:31 withyfn:43 withn:9];
-    //    [escCmd addQRCodeSizewithpL:3 withpH:0 withcn:31 withyfn:45 withn:30];
-    //    [escCmd addQRCodeSavewithpL:pL withpH:pH withcn:31 withyfn:50 withm:30 withData:contentData];
-    //    [escCmd addQRCodePrintwithpL:3 withpH:0 withcn:31 withyfn:52 withm:30];
-    //    [escCmd addQRCodePrintwithpL:3 withpH:0 withcn:31 withyfn:51 withm:30];
-    //[escCmd addPrintMode: 0x1B];
-    //[escCmd addPrintAndFeedLines:1];
+
     
     Byte PrinterInit[] = {0x1b,0x40};
     Byte QRCodeSize[] = {0x1d,0x28,0x6b,0x03,0x00,0x31,0x43,0x09};
@@ -223,7 +204,7 @@
     NSData *data1= [NSData dataWithBytes: array length: sizeof(array)];
     
     //左边间隔
-    Byte paddingLeftByte[] = {0x1B,0x42,0x04};
+    Byte paddingLeftByte[] = {0x1B,0x42,0x05};
     NSData* paddingLeft = [NSData dataWithBytes:paddingLeftByte length:sizeof(paddingLeftByte)];
     
     //左对齐
@@ -239,15 +220,16 @@
     Byte line[] = {0x1B,0X64,4};
     NSData *dataLine = [NSData dataWithBytes: line length: sizeof(line)];
     
+    
     //间隔 ⇀
     double sizeLen0 = 368.00/32.00;
     double sizeTo0 = [self convertToInt:_PrintDataSource[10]];
-    double len0 = 368.00 - sizeTo0 * sizeLen0;
+    double len0 = 450 - sizeTo0 * sizeLen0;
     Byte str11Arr[] = {0x1b,0x24,(int)len0,1};
     NSData *citySpace = [NSData dataWithBytes: str11Arr length: sizeof(str11Arr)];
     
     double sizeTo1 = [self convertToInt:_PrintDataSource[13]];
-    double len1 = 368.00- sizeTo1 * sizeLen0;
+    double len1 = 450- sizeTo1 * sizeLen0;
     Byte str12Arr[] = {0x1b,0x24,(int)len1,1};
     NSData *nameSpace = [NSData dataWithBytes: str12Arr length: sizeof(str12Arr)];
     
@@ -267,6 +249,7 @@
     [printData appendData:nameSpace];
     [printData appendData:ReceiveName];
     [printData appendData:data1];//换行
+   
     
     [printData appendData:OrderNumber];
     [printData appendData:data1];//换行
