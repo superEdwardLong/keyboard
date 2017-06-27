@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="OrderListImageCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bMC-HU-s5L">
+                    <rect key="frame" x="225" y="0.0" width="150" height="150"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="uLE-cE-dOa"/>
+                        <constraint firstAttribute="height" constant="150" id="xdx-Yg-HSD"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KV8-mt-NKn" userLabel="FromLabel">
+                    <rect key="frame" x="40" y="8" width="177" height="63"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbc-mQ-k7c" userLabel="toLabel">
+                    <rect key="frame" x="32" y="79" width="185" height="63"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-shou" translatesAutoresizingMaskIntoConstraints="NO" id="Amr-5V-MJg">
+                    <rect key="frame" x="8" y="98" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="24" id="3gR-zL-nk1"/>
+                        <constraint firstAttribute="height" constant="24" id="dAD-jI-Rv3"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-ji" translatesAutoresizingMaskIntoConstraints="NO" id="EdR-Vd-8eJ">
+                    <rect key="frame" x="8" y="27" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="24" id="Gt9-zL-MgK"/>
+                        <constraint firstAttribute="height" constant="24" id="U4F-aR-jHf"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="bMC-HU-s5L" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="0Vg-2a-RL8"/>
+                <constraint firstItem="mbc-mQ-k7c" firstAttribute="top" secondItem="KV8-mt-NKn" secondAttribute="bottom" constant="8" id="3Jl-YL-Ugh"/>
+                <constraint firstItem="bMC-HU-s5L" firstAttribute="leading" secondItem="mbc-mQ-k7c" secondAttribute="trailing" constant="8" id="7ot-gI-dB0"/>
+                <constraint firstItem="mbc-mQ-k7c" firstAttribute="height" secondItem="KV8-mt-NKn" secondAttribute="height" id="DmB-pK-2FI"/>
+                <constraint firstItem="EdR-Vd-8eJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="ISq-iv-zoy"/>
+                <constraint firstItem="bMC-HU-s5L" firstAttribute="leading" secondItem="KV8-mt-NKn" secondAttribute="trailing" constant="8" id="Lhk-oP-Vw4"/>
+                <constraint firstItem="mbc-mQ-k7c" firstAttribute="leading" secondItem="Amr-5V-MJg" secondAttribute="trailing" id="Q5B-7D-TRa"/>
+                <constraint firstAttribute="bottom" secondItem="Amr-5V-MJg" secondAttribute="bottom" constant="28" id="RY9-uZ-o3k"/>
+                <constraint firstItem="KV8-mt-NKn" firstAttribute="leading" secondItem="EdR-Vd-8eJ" secondAttribute="trailing" constant="8" id="T2M-T5-EvN"/>
+                <constraint firstItem="KV8-mt-NKn" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="X9f-Ds-IhW"/>
+                <constraint firstItem="EdR-Vd-8eJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="27" id="bAe-GF-NfJ"/>
+                <constraint firstItem="Amr-5V-MJg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="gvY-TZ-hh9"/>
+                <constraint firstAttribute="trailing" secondItem="bMC-HU-s5L" secondAttribute="trailing" id="oK9-gr-NLb"/>
+                <constraint firstAttribute="bottom" secondItem="mbc-mQ-k7c" secondAttribute="bottom" constant="8" id="rUM-qn-tw4"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="QRCodeImage" destination="bMC-HU-s5L" id="Ma4-uc-RfB"/>
+                <outlet property="label_from" destination="KV8-mt-NKn" id="oU7-Mx-eTS"/>
+                <outlet property="label_to" destination="mbc-mQ-k7c" id="lnh-Qk-nef"/>
+            </connections>
+            <point key="canvasLocation" x="33.5" y="54"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon-ji" width="25" height="25"/>
+        <image name="icon-shou" width="25" height="25"/>
+    </resources>
+</document>

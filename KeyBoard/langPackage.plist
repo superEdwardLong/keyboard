@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>useLanguage</key>
+	<string>cn</string>
+	<key>cn</key>
+	<dict>
+		<key>page</key>
+		<dict>
+			<key>orderInsurance</key>
+			<string>保        价</string>
+			<key>orderInsuranceNot</key>
+			<string>不保价</string>
+			<key>orderPayModel</key>
+			<string>支付方式</string>
+			<key>callSupplement</key>
+			<string>完善快递信息</string>
+			<key>callHelp</key>
+			<string>可帮助小哥做好上门准备哦</string>
+			<key>callXiaoGe</key>
+			<string>顺丰小哥</string>
+			<key>today</key>
+			<string>今天</string>
+			<key>tomorrow</key>
+			<string>明天</string>
+			<key>undefind</key>
+			<string>待定</string>
+			<key>watting</key>
+			<string>等待上门</string>
+			<key>cancel</key>
+			<string>已取消</string>
+			<key>done</key>
+			<string>已签收</string>
+			<key>maybe</key>
+			<string>预计上门时间</string>
+			<key>infoTip</key>
+			<string>向快递员或服务点出示二维码，即可寄件</string>
+			<key>orderNumber</key>
+			<string>运单号</string>
+			<key>orderCreateTime</key>
+			<string>下单时间</string>
+			<key>orderCancelTime</key>
+			<string>取消时间</string>
+			<key>orderAssignTime</key>
+			<string>预约时间</string>
+			<key>orderComment</key>
+			<string>去评分</string>
+			<key>networkRequest</key>
+			<string>网络请求中...</string>
+			<key>networkDisable</key>
+			<string>网络不可用</string>
+			<key>sameWorring</key>
+			<string>发件地址与收件地址不能相同</string>
+		</dict>
+		<key>menu</key>
+		<dict>
+			<key>address</key>
+			<string>地址本</string>
+			<key>searchRecord</key>
+			<string>查记录</string>
+			<key>shipt</key>
+			<string>寄快件</string>
+			<key>del</key>
+			<string>删除</string>
+			<key>add</key>
+			<string>添加</string>
+			<key>img</key>
+			<string>大图</string>
+			<key>list</key>
+			<string>列表</string>
+			<key>adv</key>
+			<string>高级</string>
+			<key>edit</key>
+			<string>编辑</string>
+			<key>save</key>
+			<string>保存</string>
+			<key>qrcode</key>
+			<string>二维码</string>
+			<key>appointment</key>
+			<string>预约</string>
+			<key>appointmentXiaoGe</key>
+			<string>预约小哥</string>
+			<key>ok</key>
+			<string>确定</string>
+			<key>cancel</key>
+			<string>取消</string>
+			<key>ai</key>
+			<string>智能</string>
+			<key>clear</key>
+			<string> 清空</string>
+			<key>back</key>
+			<string>返回</string>
+			<key>share</key>
+			<string>分享</string>
+			<key>orderCancel</key>
+			<string>取消预约</string>
+			<key>callXiaoGe</key>
+			<string>呼叫小哥</string>
+			<key>appointmentDone</key>
+			<string>已预约</string>
+			<key>later</key>
+			<string>稍后使用</string>
+			<key>orderNone</key>
+			<string>您的运单列表为空，点这里创建运单</string>
+			<key>addressNone</key>
+			<string>请点击这里创建地址簿</string>
+		</dict>
+		<key>alert</key>
+		<dict>
+			<key>msgDidPaste</key>
+			<string>信息已拷贝到剪切板</string>
+			<key>btnTitleCreate</key>
+			<string>创建</string>
+			<key>btnTitleNotCreate</key>
+			<string>不创建</string>
+			<key>btnTitleOk</key>
+			<string>确认</string>
+			<key>btnTitleCancel</key>
+			<string>取消</string>
+			<key>btnTitlePaste</key>
+			<string>马上粘贴</string>
+			<key>btnTitleShipt</key>
+			<string>马上寄件</string>
+			<key>btnTitleNotDo</key>
+			<string>暂时不要</string>
+			<key>msgDel</key>
+			<string>确定删除吗？</string>
+			<key>msgClipboard</key>
+			<string>您是否需要将以下内容粘贴到新地址编辑器中</string>
+			<key>msgLeave</key>
+			<string>当前地址簿尚未保存，确定离开吗？【取消】返回保存。</string>
+			<key>msgNil</key>
+			<string>地址簿为空，请先创建！</string>
+			<key>msgSucc</key>
+			<string>数据保存成功</string>
+			<key>msgOrderCancel</key>
+			<string>预约已取消</string>
+			<key>msgDataLoading</key>
+			<string>数据处理中</string>
+		</dict>
+		<key>picker</key>
+		<dict>
+			<key>package</key>
+			<dict>
+				<key>title</key>
+				<string>包裹</string>
+				<key>options</key>
+				<array>
+					<string>文件</string>
+					<string>数码产品</string>
+					<string>日用品</string>
+					<string>服饰</string>
+					<string>食品</string>
+					<string>其他</string>
+				</array>
+			</dict>
+			<key>insured</key>
+			<dict>
+				<key>title</key>
+				<string>保价</string>
+				<key>options</key>
+				<array>
+					<string>0</string>
+					<string>500</string>
+					<string>1000</string>
+					<string>3000</string>
+					<string>5000</string>
+					<string>10000</string>
+					<string>15000</string>
+					<string>20000</string>
+				</array>
+			</dict>
+			<key>pay</key>
+			<dict>
+				<key>title</key>
+				<string>支付方式</string>
+				<key>options</key>
+				<array>
+					<string>寄付现结</string>
+					<string>到付</string>
+					<string>寄付月结</string>
+				</array>
+			</dict>
+		</dict>
+	</dict>
+	<key>en</key>
+	<dict>
+		<key>page</key>
+		<dict>
+			<key>callSupplement</key>
+			<string>Supplementary data</string>
+			<key>orderInsuranceNot</key>
+			<string>NO</string>
+			<key>orderInsurance</key>
+			<string>Insurance</string>
+			<key> orderPayModel</key>
+			<string>Pay</string>
+			<key>callHelp</key>
+			<string>Will be can do the best For you</string>
+			<key>callXiaoGe</key>
+			<string>CALL COURER</string>
+			<key>today</key>
+			<string>TODAY</string>
+			<key>tomorrow</key>
+			<string>TOMORROW</string>
+			<key>undefind</key>
+			<string>Undefind</string>
+			<key>watting</key>
+			<string>Waiting for courier</string>
+			<key>cancel</key>
+			<string>Cancelled</string>
+			<key>done</key>
+			<string>Delivered</string>
+			<key>maybe</key>
+			<string>Estimated delivery time</string>
+			<key>infoTip</key>
+			<string>SHOW THE FOLLOWING COURIER</string>
+			<key>orderNumber</key>
+			<string>Parcel #</string>
+			<key>orderCreateTime</key>
+			<string>Create time</string>
+			<key>networkRequest</key>
+			<string>Getting data...</string>
+			<key>orderCancelTime</key>
+			<string>Cancel time</string>
+			<key>orderAssignTime</key>
+			<string>Appointment time</string>
+			<key>orderComment</key>
+			<string>Comment</string>
+			<key>networkDisable</key>
+			<string>nternet connection not available</string>
+			<key>sameWorring</key>
+			<string>From and To addresses are the same!</string>
+		</dict>
+		<key>menu</key>
+		<dict>
+			<key>shipt</key>
+			<string>SHIP</string>
+			<key>searchRecord</key>
+			<string>LIST</string>
+			<key>address</key>
+			<string>ADRS</string>
+			<key>del</key>
+			<string>Del.</string>
+			<key>add</key>
+			<string>Add</string>
+			<key>img</key>
+			<string>QR</string>
+			<key>list</key>
+			<string>List</string>
+			<key>adv</key>
+			<string>Adv.</string>
+			<key>edit</key>
+			<string>Edit</string>
+			<key>save</key>
+			<string>Save</string>
+			<key>qrcode</key>
+			<string>QRCode</string>
+			<key>appointment</key>
+			<string>MAKE APPOINTMENT</string>
+			<key>appointmentXiaoGe</key>
+			<string>MAKE APPOINTMENT</string>
+			<key>ok</key>
+			<string>OK</string>
+			<key>cancel</key>
+			<string>Cancl.</string>
+			<key>ai</key>
+			<string>AI</string>
+			<key>clear</key>
+			<string>Clr.</string>
+			<key>back</key>
+			<string>BACK</string>
+			<key>share</key>
+			<string>SHARE</string>
+			<key>orderCancel</key>
+			<string>CANCEL</string>
+			<key>callXiaoGe</key>
+			<string>CALL COURER</string>
+			<key>appointmentDone</key>
+			<string>COMPLETE</string>
+			<key>later</key>
+			<string>USE LATER</string>
+			<key>orderNone</key>
+			<string>Your parcel list is empty, please click to start shipping</string>
+			<key>addressNone</key>
+			<string>Please click here to create the addess!</string>
+		</dict>
+		<key>alert</key>
+		<dict>
+			<key>msgDidPaste</key>
+			<string>Data already copy into clipboard</string>
+			<key>btnTitleCreate</key>
+			<string>CREATE NOW</string>
+			<key>btnTitleNotCreate</key>
+			<string>LATER</string>
+			<key>btnTitleOk</key>
+			<string>OK</string>
+			<key>btnTitleCancel</key>
+			<string>CANCEL</string>
+			<key>btnTitlePaste</key>
+			<string>Paste Now</string>
+			<key>btnTitleShipt</key>
+			<string>Ship Now</string>
+			<key>btnTitleNotDo</key>
+			<string>Later</string>
+			<key>msgDel</key>
+			<string>Are you sure to delete?</string>
+			<key>msgLeave</key>
+			<string>Address not saved, leave anyway?</string>
+			<key>msgNil</key>
+			<string>Address book is empty, please creat one first!</string>
+			<key>msgClipboard</key>
+			<string>How do you want to deal with the address in your clipboard</string>
+			<key>msgSucc</key>
+			<string>Data saved successfully</string>
+			<key>msgOrderCancel</key>
+			<string>Appointment cancelled</string>
+			<key>msgDataLoading</key>
+			<string>Appointment cancelled</string>
+		</dict>
+		<key>picker</key>
+		<dict>
+			<key>package</key>
+			<dict>
+				<key>title</key>
+				<string>CTNT</string>
+				<key>options</key>
+				<array>
+					<string>Doc</string>
+					<string>Eletronics</string>
+					<string>Personal stuff</string>
+					<string>Clothing</string>
+					<string>Foods</string>
+					<string>Others</string>
+				</array>
+			</dict>
+			<key>insured</key>
+			<dict>
+				<key>title</key>
+				<string>INSR</string>
+				<key>options</key>
+				<array>
+					<string>0</string>
+					<string>500</string>
+					<string>1000</string>
+					<string>3000</string>
+					<string>5000</string>
+					<string>10000</string>
+					<string>15000</string>
+					<string>20000</string>
+				</array>
+			</dict>
+			<key>pay</key>
+			<dict>
+				<key>title</key>
+				<string>PMNT</string>
+				<key>options</key>
+				<array>
+					<string>Sender</string>
+					<string>Recipient</string>
+					<string>Sender with account</string>
+				</array>
+			</dict>
+		</dict>
+	</dict>
+</dict>
+</plist>

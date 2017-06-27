@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>company</key>
+		<string>顺丰</string>
+		<key>url</key>
+		<string>http://u2898.com/SFKeyboard/AddOrder.html</string>
+		<key>logo</key>
+		<string>KD_SHUFENG_30</string>
+		<key>id</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>company</key>
+		<string>圆通</string>
+        <key>url</key>
+        <string>http://u2898.com/SFKeyboard/AddOrder.html</string>
+		<key>logo</key>
+		<string>KD_SHUFENG_30</string>
+		<key>id</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>company</key>
+		<string>申通</string>
+        <key>url</key>
+        <string>http://u2898.com/SFKeyboard/AddOrder.html</string>
+		<key>logo</key>
+		<string>KD_SHUFENG_30</string>
+		<key>id</key>
+		<integer>3</integer>
+	</dict>
+	<dict>
+		<key>company</key>
+		<string>中通</string>
+        <key>url</key>
+        <string>http://u2898.com/SFKeyboard/AddOrder.html</string>
+		<key>logo</key>
+		<string>KD_SHUFENG_30</string>
+		<key>id</key>
+		<integer>4</integer>
+	</dict>
+	<dict>
+		<key>company</key>
+		<string>百世</string>
+        <key>url</key>
+        <string>http://u2898.com/SFKeyboard/AddOrder.html</string>
+		<key>logo</key>
+		<string>KD_SHUFENG_30</string>
+		<key>id</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>company</key>
+		<string>天天</string>
+        <key>url</key>
+        <string>http://u2898.com/SFKeyboard/AddOrder.html</string>
+		<key>logo</key>
+		<string>KD_SHUFENG_30</string>
+		<key>id</key>
+		<integer>6</integer>
+	</dict>
+</array>
+</plist>

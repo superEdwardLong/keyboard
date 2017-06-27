@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CompanyCell">
+            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="KD_SHUFENG_30" translatesAutoresizingMaskIntoConstraints="NO" id="ezd-Gy-bIH">
+                        <rect key="frame" x="12.5" y="4" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="Jo1-br-wfS"/>
+                            <constraint firstAttribute="width" constant="25" id="ejA-gk-Gsh"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="顺丰" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PoL-eG-PKI">
+                        <rect key="frame" x="0.0" y="33" width="50" height="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="PoL-eG-PKI" secondAttribute="bottom" constant="4" id="NGT-eE-Zio"/>
+                <constraint firstItem="ezd-Gy-bIH" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="cnZ-Js-j8r"/>
+                <constraint firstItem="PoL-eG-PKI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="fpR-Dt-0LL"/>
+                <constraint firstItem="PoL-eG-PKI" firstAttribute="top" secondItem="ezd-Gy-bIH" secondAttribute="bottom" constant="4" id="ifu-5e-Kpb"/>
+                <constraint firstItem="ezd-Gy-bIH" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="pRX-IQ-980"/>
+                <constraint firstAttribute="trailing" secondItem="PoL-eG-PKI" secondAttribute="trailing" id="qDF-h8-gID"/>
+            </constraints>
+            <connections>
+                <outlet property="imageView" destination="ezd-Gy-bIH" id="yG4-Ws-sjB"/>
+                <outlet property="text" destination="PoL-eG-PKI" id="Lnw-lm-HSi"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="KD_SHUFENG_30" width="30" height="30"/>
+    </resources>
+</document>
