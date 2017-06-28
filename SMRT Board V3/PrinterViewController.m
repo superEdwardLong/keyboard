@@ -46,15 +46,13 @@
     shapeLayer.frame = _col_2.bounds;
     
     [_col_2.layer addSublayer:shapeLayer];
-    _btn_scan.tag = 201; //默认为等待扫描
     
+    _btn_scan.tag = 201; //默认为等待扫描
+    _manager = [[CBCentralManager alloc]initWithDelegate:self queue:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [self ShowPrintData];
-    _manager = [[CBCentralManager alloc]initWithDelegate:self queue:nil];
-    
-    
     if(self.currPeripheral && self.currPeripheral.state == CBPeripheralStateConnected){
         for(CBService*service in self.currPeripheral.services){
             //服务
@@ -101,8 +99,13 @@
         }
             break;
         case CBManagerStatePoweredOn:{
-            _btn_scan.tag = 201;
-            [_btn_scan setTitle:@"扫描设备" forState:UIControlStateNormal];
+            if(self.currPeripheral && self.currPeripheral.state == CBPeripheralStateConnected){
+                _btn_scan.tag = 200;
+                [_btn_scan setTitle:@"打印运单" forState:UIControlStateNormal];
+            }else{
+                _btn_scan.tag = 201;
+                [_btn_scan setTitle:@"扫描设备" forState:UIControlStateNormal];
+            }
             
         }break;
             
