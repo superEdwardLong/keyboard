@@ -93,8 +93,7 @@
 }
 
 #pragma mark 蓝牙代理
-- (void)centralManagerDidUpdateState:(CBCentralManager *)central{
-    
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central{    
     switch (central.state) {
         case CBManagerStatePoweredOff:{
             _btn_scan.tag = 202;
@@ -144,6 +143,10 @@
             [self DoPrintData];
         }
             break;
+            
+        case 202:{
+            [SVProgressHUD showInfoWithStatus:@"请打开蓝牙"];
+        }break;
     }
 }
 
