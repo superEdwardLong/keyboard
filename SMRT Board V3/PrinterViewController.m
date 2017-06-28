@@ -9,8 +9,8 @@
 #import "ConnViewController.h"
 #import "PrinterViewController.h"
 
-@interface PrinterViewController ()
-
+@interface PrinterViewController ()<CBCentralManagerDelegate>
+@property(nonatomic,strong) CBCentralManager *manager;
 @property (weak, nonatomic) IBOutlet UIImageView *QRCodeImage;
 @property (weak, nonatomic) IBOutlet UILabel *label_sender_city;
 @property (weak, nonatomic) IBOutlet UILabel *label_sender_user;
@@ -52,6 +52,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [self ShowPrintData];
+    _manager = [[CBCentralManager alloc]initWithDelegate:self queue:nil];
     
     
     if(self.currPeripheral && self.currPeripheral.state == CBPeripheralStateConnected){
@@ -91,6 +92,28 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark 蓝牙代理
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central{
+    
+    switch (central.state) {
+        case CBManagerStatePoweredOff:{
+            _btn_scan.tag = 202;
+            [_btn_scan setTitle:@"请打开蓝牙" forState:UIControlStateNormal];
+        }
+            break;
+        case CBManagerStatePoweredOn:{
+            _btn_scan.tag = 201;
+            [_btn_scan setTitle:@"扫描设备" forState:UIControlStateNormal];
+            
+        }break;
+            
+        default:{
+            
+        }
+            break;
+    }
+
+}
 
 
 - (IBAction)Do_Scan:(UIButton *)sender {
@@ -108,7 +131,7 @@
             break;
             
         case 200:{
-            //CBCentralManagerStatePoweredOn
+            
             if(self.currPeripheral.state  != CBPeripheralStateConnected){
                 sender.tag = 201;
                 [_btn_scan setTitle:@"重新扫描设备" forState:UIControlStateNormal];
