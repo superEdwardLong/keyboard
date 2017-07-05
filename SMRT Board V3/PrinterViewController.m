@@ -219,8 +219,8 @@ typedef struct ARGBPixel{
     NSData *SenderCity = [_PrintDataSource[8] dataUsingEncoding:enc];
     NSData *SenderName = [_PrintDataSource[5] dataUsingEncoding:enc];
     
-    NSData *ReceiveCity = [_PrintDataSource[10] dataUsingEncoding:enc];
-    NSData *ReceiveName = [_PrintDataSource[13] dataUsingEncoding:enc];
+    NSData *ReceiveCity = [_PrintDataSource[13] dataUsingEncoding:enc];
+    NSData *ReceiveName = [_PrintDataSource[10] dataUsingEncoding:enc];
     
     NSString*StrOrderNumber = [NSString stringWithFormat:@"%@:%@",[_db getPageItemTitle:@"orderNumber"],_PrintDataSource[1]];
     NSString*StrOrderTime = [self GetAssignText:_PrintDataSource];
@@ -421,8 +421,8 @@ typedef struct ARGBPixel{
         _label_sender_city.text = OrderData[8];
         _label_sender_user.text = [OrderData[5] stringByReplacingOccurrencesOfString:@"，" withString:@""];
         
-        _label_reveice_city.text = OrderData[10];
-        _label_reveice_user.text = [OrderData[13] stringByReplacingOccurrencesOfString:@"，" withString:@""];
+        _label_reveice_city.text = [OrderData[13] stringByReplacingOccurrencesOfString:@"，" withString:@""] ;
+        _label_reveice_user.text = OrderData[10];
         
         _label_order_number.text = [NSString stringWithFormat:@"%@:%@",[_db getPageItemTitle:@"orderNumber"],OrderData[1]];
         
