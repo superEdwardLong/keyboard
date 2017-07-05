@@ -559,6 +559,9 @@ BasicBoardViewDelegate>
                 break;
             }
         }
+        if(matchIndex != -1){
+            break;
+        }
     }
     
     //最有可能出现名字的位置
@@ -612,6 +615,7 @@ BasicBoardViewDelegate>
         //无电话，或 电话在前面 或 电话在 最后面
         //电话在两边，先过滤电话号码
         str_temp = phone.length == 0 ? address : [address stringByReplacingOccurrencesOfString:phone withString:@""];
+        str_temp = [str_temp stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@".?#!,，。？！"]];
         
         //从这个字符串提取姓名和地址
         cityRange = [self getCityRange:city withProvince:province withAddress:str_temp];
@@ -748,48 +752,25 @@ BasicBoardViewDelegate>
         
     }else{
         if(phone.length > 0){
-            address = [address stringByReplacingOccurrencesOfString:phone withString:@" "];
+            address = [address stringByReplacingOccurrencesOfString:phone withString:@""];
+            address = [address stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@".?#!,，。？！"]];
         }
-        NSArray *itmes = [self getDetailAndNameFromString:address withProvince:@"" withCity:@""];
-        address = itmes[1];
         
+        NSArray *itmes = [self getDetailAndNameFromString:address withProvince:@"" withCity:@""];
+        sendItem.strName = itmes[0];
+        sendItem.strAddress = itmes[1];
+        
+        address = itmes[1];
         [self check_Address_api:address
                        withCell:nil
                    withResponse:^(NSString * _Nullable resultProvince, NSString * _Nullable resultCity) {
-                       NSArray *itmes;
                        if(resultProvince && resultCity){
                            //省份
                            sendItem.strProv = resultProvince;
                            
                            //城市
                            sendItem.strCity = resultCity;
-                           
-                           
-                           //提取人名
-                           //提取详细地址
-                           itmes = [self getDetailAndNameFromString:address withProvince:resultProvince withCity:resultCity];
-                           if([itmes[0] length] >0){
-                               sendItem.strName = itmes[0];
-                           }
-                           
-                           if([itmes[1] length] >0){
-                               sendItem.strAddress = itmes[1];
-                           }
-                           
-                       }else{
-                           //提取人名
-                           //提取详细地址
-                           itmes = [self getDetailAndNameFromString:address withProvince:@"" withCity:@""];
-                           if([itmes[0] length] >0){
-                               sendItem.strName = itmes[0];
-                           }
-                           
-                           if([itmes[1] length] >0){
-                               sendItem.strAddress = itmes[1];
-                           }
                        }
-                       
-                       
                        //入库 + 去寄件页面
                        [self doShipt:sendItem];
                        
@@ -842,11 +823,11 @@ BasicBoardViewDelegate>
             [cell setTextViewPlaceholderHide:cell.AddressField];
         }
         
-        //[self insertJsonText:@{@"username":itmes[0],@"tel":phone,@"province":province,@"city":city,@"address":itmes[1]}];
         
     }else{
         if(phone.length > 0){
             address = [address stringByReplacingOccurrencesOfString:phone withString:@""];
+            address = [address stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@".?#!,，。？！"]];
         }
         NSArray *itmes = [self getDetailAndNameFromString:address withProvince:@"" withCity:@""];
         
@@ -855,12 +836,17 @@ BasicBoardViewDelegate>
             [cell setTextViewPlaceholderHide:cell.NameField];
         }
         
+        if([itmes[1] length] >0){
+            cell.AddressField.text = itmes[1];
+            [cell setTextViewPlaceholderHide:cell.AddressField];
+        }
+        
         address = itmes[1];
-            
+        
         [self check_Address_api:address
                        withCell:cell
                    withResponse:^(NSString * _Nullable resultProvince, NSString * _Nullable resultCity) {
-                       NSArray *itmes;
+                    
                        if(resultProvince && resultCity){
                            //省份
                            cell.ProvinceField.text = resultProvince;
@@ -869,35 +855,7 @@ BasicBoardViewDelegate>
                            cell.CityField.text = resultCity;
                            [cell setTextViewPlaceholderHide:cell.CityField];
                            
-                           //提取人名
-                           //提取详细地址
-                           itmes = [self getDetailAndNameFromString:address withProvince:province withCity:city];
-                           if([itmes[0] length] >0){
-                               cell.NameField.text = itmes[0];
-                               [cell setTextViewPlaceholderHide:cell.NameField];
-                           }
-                           
-                           if([itmes[1] length] >0){
-                               cell.AddressField.text = itmes[1];
-                               [cell setTextViewPlaceholderHide:cell.AddressField];
-                           }
-                           
-                       }else{
-                           //提取人名
-                           //提取详细地址
-                           itmes = [self getDetailAndNameFromString:address withProvince:@"" withCity:@""];
-                           if([itmes[0] length] >0){
-                               cell.NameField.text = itmes[0];
-                               [cell setTextViewPlaceholderHide:cell.NameField];
-                           }
-                           
-                           if([itmes[1] length] >0){
-                               cell.AddressField.text = itmes[1];
-                               [cell setTextViewPlaceholderHide:cell.AddressField];
-                           }
                        }
-                       
-                       //[self insertJsonText:@{@"username":itmes[0],@"tel":phone,@"province":province,@"city":city,@"address":itmes[1]}];
                    }];
     }
 }
