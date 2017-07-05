@@ -585,7 +585,7 @@ BasicBoardViewDelegate>
         }
     }
     
-    myName = [myName stringByReplacingOccurrencesOfString:@"，" withString:@""];
+    myName = [myName stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@".?#!,，。？！"]];
     return @{@"name":myName,@"index":@(matchIndex)};
 }
 
@@ -603,7 +603,7 @@ BasicBoardViewDelegate>
     if(phone && phone.length > 0){
         phoneRange = [address rangeOfString:phone];
     }else{
-        phoneRange = [address rangeOfString:@"SORRY没有匹配到电话"];
+        phoneRange = NSMakeRange(NSNotFound, 0);
     }
     
     
@@ -661,7 +661,11 @@ BasicBoardViewDelegate>
             detail = [detail substringFromIndex:cityRange.location+cityRange.length];
         }
     }
-    myName = [myName stringByReplacingOccurrencesOfString:@"，" withString:@""];
+    
+    //过滤两端字符
+    myName = [myName stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@".?#!,，。？！"]];
+    detail = [detail stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@".?#!,，。？！"]];
+    
     NSArray *arr = @[myName,detail];
     return arr;
 }
@@ -702,7 +706,7 @@ BasicBoardViewDelegate>
         }
         
     }else{
-        cityRange = [address rangeOfString:@"SORRY没有搜索到省份城市结果"];
+        cityRange = NSMakeRange(NSNotFound, 0);
     }
     return cityRange;
 }
@@ -842,13 +846,17 @@ BasicBoardViewDelegate>
         
     }else{
         if(phone.length > 0){
-            address = [address stringByReplacingOccurrencesOfString:phone withString:@" "];
+            address = [address stringByReplacingOccurrencesOfString:phone withString:@""];
         }
         NSArray *itmes = [self getDetailAndNameFromString:address withProvince:@"" withCity:@""];
+        
+        if([itmes[0] length] > 0){
+            cell.NameField.text = itmes[0];
+            [cell setTextViewPlaceholderHide:cell.NameField];
+        }
+        
         address = itmes[1];
-        
-        
-        
+            
         [self check_Address_api:address
                        withCell:cell
                    withResponse:^(NSString * _Nullable resultProvince, NSString * _Nullable resultCity) {

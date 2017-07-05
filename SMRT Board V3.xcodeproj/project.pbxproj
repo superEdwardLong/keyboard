@@ -101,7 +101,6 @@
 		3060DF671EACB29C00ACDEBB /* ContactViewCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 306BE4F01E9636E800A3DF2D /* ContactViewCell2.xib */; };
 		3060DF6A1EACCAA000ACDEBB /* VerticalAlignLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3060DF691EACCAA000ACDEBB /* VerticalAlignLabel.m */; };
 		3060DF6B1EACCAA000ACDEBB /* VerticalAlignLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3060DF691EACCAA000ACDEBB /* VerticalAlignLabel.m */; };
-		3068C8051F0BA0030075FBF9 /* DXImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3068C8041F0BA0030075FBF9 /* DXImage.m */; };
 		306BE4DC1E95F93300A3DF2D /* wordlib.db in Resources */ = {isa = PBXBuildFile; fileRef = 30FE3AA01E94FC8600089B75 /* wordlib.db */; };
 		306BE4FB1E9636E800A3DF2D /* ContactViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 306BE4EC1E9636E800A3DF2D /* ContactViewCell.m */; };
 		306BE4FC1E9636E800A3DF2D /* ContactViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 306BE4ED1E9636E800A3DF2D /* ContactViewCell.xib */; };
@@ -323,8 +322,6 @@
 		3060DF5C1EACB15E00ACDEBB /* BOT3DOptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOT3DOptionView.m; sourceTree = "<group>"; };
 		3060DF681EACCAA000ACDEBB /* VerticalAlignLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VerticalAlignLabel.h; path = VerticalAlignLabel/VerticalAlignLabel.h; sourceTree = "<group>"; };
 		3060DF691EACCAA000ACDEBB /* VerticalAlignLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VerticalAlignLabel.m; path = VerticalAlignLabel/VerticalAlignLabel.m; sourceTree = "<group>"; };
-		3068C8031F0BA0030075FBF9 /* DXImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXImage.h; sourceTree = "<group>"; };
-		3068C8041F0BA0030075FBF9 /* DXImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXImage.m; sourceTree = "<group>"; };
 		306BE4EB1E9636E800A3DF2D /* ContactViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactViewCell.h; sourceTree = "<group>"; };
 		306BE4EC1E9636E800A3DF2D /* ContactViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactViewCell.m; sourceTree = "<group>"; };
 		306BE4ED1E9636E800A3DF2D /* ContactViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactViewCell.xib; sourceTree = "<group>"; };
@@ -879,8 +876,6 @@
 				8D6839B71EFECC4A0097F2AF /* ConnViewController.h */,
 				8D6839B81EFECC4A0097F2AF /* ConnViewController.m */,
 				8D6839B91EFECC4A0097F2AF /* ConnViewController.xib */,
-				3068C8031F0BA0030075FBF9 /* DXImage.h */,
-				3068C8041F0BA0030075FBF9 /* DXImage.m */,
 			);
 			path = "SMRT Board V3";
 			sourceTree = "<group>";
@@ -1226,7 +1221,6 @@
 				8D6839AF1EFECBA20097F2AF /* BabyOptions.m in Sources */,
 				30EFA0601E8E501B00B2727D /* FMDatabaseQueue.m in Sources */,
 				300CC8C71EC2D56600AE47A3 /* MJRefreshAutoFooter.m in Sources */,
-				3068C8051F0BA0030075FBF9 /* DXImage.m in Sources */,
 				300CC8CD1EC2D56600AE47A3 /* MJRefreshFooter.m in Sources */,
 				30050B3F1EAB539100F12EC4 /* VerticalImageButton.m in Sources */,
 				300CC8D31EC2D56600AE47A3 /* MJRefreshAutoNormalFooter.m in Sources */,

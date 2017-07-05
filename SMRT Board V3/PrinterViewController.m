@@ -5,7 +5,7 @@
 //  Created by john long on 2017/6/22.
 //  Copyright © 2017年 BizOpsTech. All rights reserved.
 //
-#import "DXImage.h"
+
 
 #import "ConnViewController.h"
 #import "PrinterViewController.h"
@@ -24,6 +24,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *label_order_insurance;
 @property(nonatomic,retain)BoardDB *db;
 @property(nonatomic,retain)NSArray *PrintDataSource;
+
+typedef struct ARGBPixel{
+    u_int8_t red;
+    u_int8_t green;
+    u_int8_t blue;
+    u_int8_t alpha;
+}ARGBPixel;
+
 @end
 
 @implementation PrinterViewController
@@ -237,6 +245,9 @@
     Byte paddingLeftByte[] = {0x1B,0x42,0x05};
     NSData* paddingLeft = [NSData dataWithBytes:paddingLeftByte length:sizeof(paddingLeftByte)];
     
+    Byte paddingZeroByte[] = {0x1B,0x42,0x00};
+    NSData* paddingZero = [NSData dataWithBytes:paddingZeroByte length:sizeof(paddingZeroByte)];
+    
     //左对齐
     Byte alignLeft[] = {0x1B,0x61,0};
     NSData *dataLeft = [NSData dataWithBytes: alignLeft length: sizeof(alignLeft)];
@@ -254,9 +265,11 @@
     NSData *dataLine = [NSData dataWithBytes: line length: sizeof(line)];
     
     //箭头
-    NSData *dataArrow = [self getBitmapImageDataForPrint];
+    UIImage *pic=[UIImage imageNamed:@"arrow_right"];
+    NSData *dataArrow = [self getDataForPrint:pic];
     
-    //间隔 ⇀
+    
+    //间隔
     double sizeLen0 = 368.00/32.00;
     double sizeTo0 = [self convertToInt:_PrintDataSource[10]];
     double len0 = 450 - sizeTo0 * sizeLen0;
@@ -267,6 +280,15 @@
     double len1 = 450- sizeTo1 * sizeLen0;
     Byte str12Arr[] = {0x1b,0x24,(int)len1,1};
     NSData *nameSpace = [NSData dataWithBytes: str12Arr length: sizeof(str12Arr)];
+    
+    
+    //默认行间距
+    Byte lineHeightByte[] = {0x1b,0x32};
+    NSData *dataLineHeight = [NSData dataWithBytes: lineHeightByte length: sizeof(lineHeightByte)];
+    
+    //0间距
+    Byte lineHeightZeroByte[] = {0x1b,0x33,0x00};
+    NSData *dataLineHeightZero = [NSData dataWithBytes: lineHeightZeroByte length: sizeof(lineHeightZeroByte)];
     
     //整理打印数据
     NSMutableData* printData = [[NSMutableData alloc]init];
@@ -280,16 +302,19 @@
     [printData appendData:ReceiveCity];
     [printData appendData:data1];//换行
     
+    [printData appendData:dataLineHeightZero];//行间距设置为0
+    [printData appendData:paddingZero];//左对齐
     [printData appendData:dataCenter];//左对齐
     [printData appendData:dataArrow];
     [printData appendData:data1];//换行
     
     [printData appendData:dataLeft];//左对齐
+    [printData appendData:paddingLeft];//左对齐
     [printData appendData:SenderName];
     [printData appendData:nameSpace];
     [printData appendData:ReceiveName];
     [printData appendData:data1];//换行
-   
+    [printData appendData:dataLineHeight]; //行间距改为默认值
     
     [printData appendData:OrderNumber];
     [printData appendData:data1];//换行
@@ -512,17 +537,17 @@
 
 
 #pragma mark 转位图
--(DXImage *)getBitmapImageData{
-    CGImageRef cgImage = [[UIImage imageNamed:@"arrow_right"] CGImage];
-    int32_t width = (int32_t)CGImageGetWidth(cgImage);
-    int32_t height = (int32_t)CGImageGetHeight(cgImage);
+-(NSDictionary *)getBitmapImageData:(UIImage *)m_image{
+    CGImageRef cgImage = [m_image CGImage];
+    size_t width = CGImageGetWidth(cgImage);
+    size_t height = CGImageGetHeight(cgImage);
     NSInteger psize = sizeof(ARGBPixel);
     ARGBPixel * pixels = malloc(width * height * psize);
     NSMutableData* data = [[NSMutableData alloc] init];
     [self ManipulateImagePixelDataWithCGImageRef:cgImage imageData:pixels];
     for (int h = 0; h < height; h++) {
         for (int w = 0; w < width; w++) {
-            int pIndex = [self PixelIndexWithX:w y:h width:width];
+            int pIndex = [self PixelIndexWithX:w y:h width:(u_int32_t)width];
             ARGBPixel pixel = pixels[pIndex];
             if ([self PixelBrightnessWithRed:pixel.red green:pixel.green blue:pixel.blue] <= 127) {
                 u_int8_t ch = 0x01;
@@ -534,21 +559,18 @@
             }
         }
     }
-    DXImage* bi = [[DXImage alloc] init];
-    bi.bitmap = data;
-    bi.width = width;
-    bi.height = height;
-    return bi;
+    
+    return @{@"bitmap":data,@"width":@(width),@"height":@(height)};
 }
 
--(NSData *)getBitmapImageDataForPrint{
-    DXImage* bi = [self getBitmapImageData];
-    const char* bytes = bi.bitmap.bytes;
+-(NSData *)getDataForPrint:(UIImage *)m_image{
+    NSDictionary* bi = [self getBitmapImageData:m_image];
+    const char* bytes = [bi[@"bitmap"] bytes];
     NSMutableData* dd = [[NSMutableData alloc] init];
     //横向点数计算需要除以8
-    NSInteger w8 = bi.width / 8;
+    NSInteger w8 = [bi[@"width"] integerValue] / 8;
     //如果有余数，点数+1
-    NSInteger remain8 = bi.width % 8;
+    NSInteger remain8 = [bi[@"width"] integerValue] % 8;
     if (remain8 > 0) {
         w8 = w8 + 1;
     }
@@ -561,27 +583,28 @@
      yL 为高度/256的余数
      yH 为高度/256的整数
      **/
-    NSInteger xL = w8 % 256;
-    NSInteger xH = bi.width / (88 * 256);
-    NSInteger yL = bi.height % 256;
-    NSInteger yH = bi.height / 256;
+        NSInteger xL = w8 % 256;
+        NSInteger xH = [bi[@"width"] integerValue] / (8 * 256);
+        NSInteger yL = [bi[@"height"] integerValue] % 256;
+        NSInteger yH = [bi[@"height"] integerValue] / 256;
     
-    const char cmd[] = {0x1d,0x76,0x30,0,xL,xH,yL,yH};
-    [dd appendBytes:cmd length:8];
+        const char cmd[] = {0x1d,0x76,0x30,0,xL,xH,yL,yH};
+        [dd appendBytes:cmd length:8];
     
-    for (int h = 0; h < bi.height; h++) {
+    for (int h = 0; h < [bi[@"height"] intValue]; h++) {
         for (int w = 0; w < w8; w++) {
             u_int8_t n = 0;
             for (int i=0; i<8; i++) {
                 int x = i + w * 8;
                 u_int8_t ch;
-                if (x < bi.width) {
-                    int pindex = h * bi.width + x;
+                if (x < [bi[@"width"] intValue]) {
+                    int pindex = h * [bi[@"width"] intValue] + x;
                     ch = bytes[pindex];
                 }
                 else{
                     ch = 0x00;
                 }
+                ch = !ch;
                 n = n << 1;
                 n = n | ch;
             }
@@ -632,6 +655,7 @@
     
     return;
 }
+
 -(CGContextRef)CreateARGBBitmapContextWithCGImageRef:(CGImageRef)inImage
 {
     CGContextRef    context = NULL;
@@ -647,8 +671,8 @@
     // Declare the number of bytes per row. Each pixel in the bitmap in this
     // example is represented by 4 bytes; 8 bits each of red, green, blue, and
     // alpha.
-    bitmapBytesPerRow   = (pixelsWide * 4);
-    bitmapByteCount     = (bitmapBytesPerRow * pixelsHigh);
+    bitmapBytesPerRow   = (int)(pixelsWide * 4);
+    bitmapByteCount     = (int)(bitmapBytesPerRow * pixelsHigh);
     
     // Use the generic RGB color space.
     colorSpace =CGColorSpaceCreateDeviceRGB();
@@ -687,6 +711,7 @@
     
     return context;
 }
+
 -(u_int8_t)PixelBrightnessWithRed:(u_int8_t)red green:(u_int8_t)green blue:(u_int8_t)blue
 {
     int level = ((int)red + (int)green + (int)blue)/3;
@@ -697,4 +722,5 @@
 {
     return (x + (y * width));
 }
+
 @end
