@@ -312,26 +312,45 @@ typedef struct ARGBPixel{
     Byte lineHeightZeroByte[] = {0x1b,0x33,0x00};
     NSData *dataLineHeightZero = [NSData dataWithBytes: lineHeightZeroByte length: sizeof(lineHeightZeroByte)];
     
-    //字体
-//    Byte FontBoldByte[] = {0x1b,0x45,0x01};
-//    Byte FontNormalByte[] = {0x1b,0x45,0x00};
-//    NSData *dataFontBold = [NSData dataWithBytes: FontBoldByte length: sizeof(FontBoldByte)];
-//    NSData *dataFontNormal = [NSData dataWithBytes: FontNormalByte length: sizeof(FontNormalByte)];
+    //默认行距 一半
+    Byte lineHeightTenByte[] = {0x1b,0x33,0x10};
+    NSData *dataLineHeightTen = [NSData dataWithBytes: lineHeightTenByte length: sizeof(lineHeightTenByte)];
+    
+    //字体 加粗
+    //Byte FontBoldByte[] = {0x1b,0x21,0x08};
+    //NSData *dataFontBold = [NSData dataWithBytes: FontBoldByte length: sizeof(FontBoldByte)];
+    //字体 宽，高放大2倍
+    Byte FontScaleByte[] = {0x1d,0x21,0x10,0x1d,0x21,0x01};
+    NSData *dataFontScale = [NSData dataWithBytes: FontScaleByte length: sizeof(FontScaleByte)];
+    
+    //字体 普通
+    //Byte FontNormalByte[] = {0x1b,0x21,0x00};
+    //NSData *dataFontNormal = [NSData dataWithBytes: FontNormalByte length: sizeof(FontNormalByte)];
+    
+    //字体 宽，高默认 1倍
+    Byte FontScaleNormalByte[] = {0x1d,0x21,0x00,0x1d,0x21,0x00};
+    NSData *dataFontScaleNormal = [NSData dataWithBytes: FontScaleNormalByte length: sizeof(FontScaleNormalByte)];
+    
     
     //整理打印数据
     NSMutableData* printData = [[NSMutableData alloc]init];
     [printData appendData:InsuData];
+    [printData appendData:dataLineHeightTen];
     [printData appendData:data1];//换行
     [printData appendData:dataLeft];//左对齐
     [printData appendData:paddingLeft];//左对齐
     
-    
+    //加粗字号
+    //[printData appendData:dataFontBold];
+    [printData appendData:dataFontScale];
     [printData appendData:SenderCity];
     [printData appendData:citySpace];
     [printData appendData:ReceiveCity];
     [printData appendData:data1];//换行
     
-    
+    //默认字号
+    //[printData appendData:dataFontNormal];
+    [printData appendData:dataFontScaleNormal];
     [printData appendData:dataLineHeightZero];//行间距设置为0
     [printData appendData:paddingZero];//左对齐
     [printData appendData:dataCenter];//左对齐

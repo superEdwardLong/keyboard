@@ -37,7 +37,7 @@
 			<key>infoTip</key>
 			<string>向快递员或服务点出示二维码，即可寄件</string>
 			<key>orderNumber</key>
-			<string>运单号</string>
+			<string>运  单  号</string>
 			<key>orderCreateTime</key>
 			<string>下单时间</string>
 			<key>orderCancelTime</key>
