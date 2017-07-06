@@ -209,6 +209,25 @@ typedef struct ARGBPixel{
                                type:CBCharacteristicWriteWithResponse];
 }
 
+-(NSString*)TrimString:(NSString*)text{
+    NSMutableString *title = [[NSMutableString alloc]init];
+    BOOL didInsert = NO;
+    for(NSInteger i=0; i<text.length; i++){
+        if([text characterAtIndex:i] == 32){
+            if(didInsert == NO){
+                [title appendString:[text substringWithRange:NSMakeRange(i, 1)]];
+                didInsert = YES;
+            }else{
+                didInsert = NO;
+            }
+        }else{
+            [title appendString:[text substringWithRange:NSMakeRange(i, 1)]];
+        }
+    }
+    return title;
+}
+
+
 -(void)DoPrintData{
     if(_db == nil){
         _db = [BoardDB new];
@@ -222,10 +241,13 @@ typedef struct ARGBPixel{
     NSData *ReceiveCity = [_PrintDataSource[13] dataUsingEncoding:enc];
     NSData *ReceiveName = [_PrintDataSource[10] dataUsingEncoding:enc];
     
-    NSString*StrOrderNumber = [NSString stringWithFormat:@"%@:%@",[_db getPageItemTitle:@"orderNumber"],_PrintDataSource[1]];
+    
+    NSString*titleOrderNumber = [self TrimString:[_db getPageItemTitle:@"orderNumber"]];
+    NSString*StrOrderNumber = [NSString stringWithFormat:@"%@: %@",titleOrderNumber,_PrintDataSource[1]];
     NSString*StrOrderTime = [self GetAssignText:_PrintDataSource];
     NSString*StrOrderPayModel = [NSString stringWithFormat:@"%@: %@",[_db getPageItemTitle:@"orderPayModel"],_PrintDataSource[4]];
-    NSString*StrOrderInsured = [self GetInsuranceText:_PrintDataSource];
+    
+    NSString*StrOrderInsured = [self TrimString:[self GetInsuranceText:_PrintDataSource]];
     
     NSData *OrderNumber = [StrOrderNumber dataUsingEncoding:enc];
     NSData *OrderTime = [StrOrderTime dataUsingEncoding:enc];
@@ -290,6 +312,12 @@ typedef struct ARGBPixel{
     Byte lineHeightZeroByte[] = {0x1b,0x33,0x00};
     NSData *dataLineHeightZero = [NSData dataWithBytes: lineHeightZeroByte length: sizeof(lineHeightZeroByte)];
     
+    //字体
+//    Byte FontBoldByte[] = {0x1b,0x45,0x01};
+//    Byte FontNormalByte[] = {0x1b,0x45,0x00};
+//    NSData *dataFontBold = [NSData dataWithBytes: FontBoldByte length: sizeof(FontBoldByte)];
+//    NSData *dataFontNormal = [NSData dataWithBytes: FontNormalByte length: sizeof(FontNormalByte)];
+    
     //整理打印数据
     NSMutableData* printData = [[NSMutableData alloc]init];
     [printData appendData:InsuData];
@@ -297,10 +325,12 @@ typedef struct ARGBPixel{
     [printData appendData:dataLeft];//左对齐
     [printData appendData:paddingLeft];//左对齐
     
+    
     [printData appendData:SenderCity];
     [printData appendData:citySpace];
     [printData appendData:ReceiveCity];
     [printData appendData:data1];//换行
+    
     
     [printData appendData:dataLineHeightZero];//行间距设置为0
     [printData appendData:paddingZero];//左对齐
@@ -417,6 +447,7 @@ typedef struct ARGBPixel{
                                                                    @"mail_to_targetNumber"]] firstObject];
     _PrintDataSource = OrderData;
     if(OrderData.count > 0){
+        
         
         _label_sender_city.text = OrderData[8];
         _label_sender_user.text = [OrderData[5] stringByReplacingOccurrencesOfString:@"，" withString:@""];
