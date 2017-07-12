@@ -132,7 +132,7 @@ BasicBoardViewDelegate>
 
 #pragma mark 数据库迁移
 -(BOOL)setDataBaseLocation{
-    int kCurrentVer = 13;
+    int kCurrentVer = 16;
     NSString *dbName = [NSString stringWithFormat:@"wordlib_ver_%d.db",kCurrentVer];
     NSURL *containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.bizopstech.keyboard"];
     NSString *db_path = [containerURL.path stringByAppendingPathComponent:dbName];
@@ -161,14 +161,20 @@ BasicBoardViewDelegate>
         ////创建新版本数据库
         NSString *source_path = [[NSBundle mainBundle]pathForResource:@"wordlib" ofType:@"db"];
         isSuccess = [[NSFileManager defaultManager] copyItemAtPath:source_path toPath:db_path error:nil];
+        
         if (isSuccess) {
             NSLog(@"新版本数据库复制成功");
         }else{
             NSLog(@"新版本数据库复制失败");
         }
-    }else{
+        
+    }
+    else{
         NSLog(@"这个版本的数据库已经存在");
     }
+    
+    
+    
     return isSuccess;
 }
 

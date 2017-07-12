@@ -38,6 +38,7 @@
 @property(nonatomic,retain)FlexButtonView2 *right_flex;
 @property(nonatomic,retain)FlexButtonView2 *center_flex;
 
+@property(nonatomic,copy)NSString *orderNumber;
 @property(nonatomic,assign)NSInteger orderId;
 
 -(void)SelectedReceiveItemAtId:(NSInteger)ReceiveId;

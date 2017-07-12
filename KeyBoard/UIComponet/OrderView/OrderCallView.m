@@ -175,7 +175,7 @@
             int x = arc4random() % 1000;
             AssignDate =[self getAssignTime];
             NSString *assignTime =  [dateformatter stringFromDate:AssignDate];
-            NSString *orderNumberId = [NSString stringWithFormat:@"SF_%ld%d", (long)[[NSDate date] timeIntervalSince1970],x];
+            NSString *orderNumberId = [NSString stringWithFormat:@"SF%ld%d", (long)[[NSDate date] timeIntervalSince1970],x];
             //更新分配时间
             [db UpdateWithSql:[NSString stringWithFormat:@"UPDATE MailList SET mail_assign_time = '%@',mail_order_id = '%@',mail_state = %ld WHERE mail_id = %ld",assignTime,orderNumberId,OrderStateWaitingReciive,orderId]];
             

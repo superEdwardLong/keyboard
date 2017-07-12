@@ -28,7 +28,7 @@
 
 
 -(FMDatabase *)OpenDb{
-    int kCurrentVer = 13;
+    int kCurrentVer = 16;
     
     NSString *dbName = [NSString stringWithFormat:@"wordlib_ver_%d.db",kCurrentVer];
     NSURL *containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.bizopstech.keyboard"];
@@ -69,6 +69,9 @@
         code = [s stringForColumn:@"cityCode"];
     }
     [db close];
+    
+    NSLog(@"== SQL:%@ City Code:%@ ==",sql,code);
+    
     return code;
 }
 
@@ -272,7 +275,7 @@
         }
     }else{
         updateId = MailItem.mailId;
-        sql = @"UPDATE MailList SET mail_order_id = ?,mail_package_type = ?,mail_package_price = ?,mail_pay_model = ?,mail_from_user = ?,mail_from_phone = ?,mail_from_province = ?,mail_from_city = ?,mail_from_address = ?,mail_to_user = ?,mail_to_phone = ?,mail_to_province = ?,mail_to_city = ?,mail_to_address = ?,mail_to_targetNumber  WHERE mail_id = ?";
+        sql = @"UPDATE MailList SET mail_order_id = ?,mail_package_type = ?,mail_package_price = ?,mail_pay_model = ?,mail_from_user = ?,mail_from_phone = ?,mail_from_province = ?,mail_from_city = ?,mail_from_address = ?,mail_to_user = ?,mail_to_phone = ?,mail_to_province = ?,mail_to_city = ?,mail_to_address = ?,mail_to_targetNumber= ?  WHERE mail_id = ?";
         result = [db executeUpdate:sql,MailItem.mailNumber,MailItem.mailPackageType,[NSNumber numberWithFloat:MailItem.mailPackagePrice],MailItem.mailPayModel,Sender.strName,Sender.strPhone,Sender.strProv,Sender.strCity,Sender.strAddress,Receive.strName,Receive.strPhone,Receive.strProv,Receive.strCity,Receive.strAddress,MailToTargetNumber,[NSNumber numberWithInteger:MailItem.mailId]];
     }
     return updateId;

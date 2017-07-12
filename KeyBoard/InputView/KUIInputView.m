@@ -697,6 +697,9 @@ LrdOutputViewDelegate>{
     
     MailItemModel *mailItem = [MailItemModel new];
     mailItem.mailId = simpleShiptView.orderId;
+    if(simpleShiptView.orderNumber){
+        mailItem.mailNumber = simpleShiptView.orderNumber;
+    }
     mailItem.mailPackageType = simpleShiptView.left_flex.label_value.text;
     mailItem.mailPackagePrice = [simpleShiptView.center_flex.label_value.text floatValue];
     mailItem.mailPayModel = simpleShiptView.right_flex.label_value.text;

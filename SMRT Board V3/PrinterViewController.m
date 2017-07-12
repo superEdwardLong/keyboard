@@ -112,8 +112,11 @@ typedef struct ARGBPixel{
                 _btn_scan.tag = 200;
                 [_btn_scan setTitle:@"打印运单" forState:UIControlStateNormal];
             }else{
+                
+                
                 _btn_scan.tag = 201;
                 [_btn_scan setTitle:@"扫描设备" forState:UIControlStateNormal];
+                
             }
             
         }break;
@@ -294,12 +297,12 @@ typedef struct ARGBPixel{
     //间隔
     double sizeLen0 = 368.00/32.00;
     double sizeTo0 = [self convertToInt:_PrintDataSource[10]];
-    double len0 = 450 - sizeTo0 * sizeLen0;
+    double len0 = 470 - sizeTo0 * sizeLen0;
     Byte str11Arr[] = {0x1b,0x24,(int)len0,1};
     NSData *citySpace = [NSData dataWithBytes: str11Arr length: sizeof(str11Arr)];
     
     double sizeTo1 = [self convertToInt:_PrintDataSource[13]];
-    double len1 = 450- sizeTo1 * sizeLen0;
+    double len1 = 430- sizeTo1 * sizeLen0;
     Byte str12Arr[] = {0x1b,0x24,(int)len1,1};
     NSData *nameSpace = [NSData dataWithBytes: str12Arr length: sizeof(str12Arr)];
     
@@ -434,7 +437,7 @@ typedef struct ARGBPixel{
     if([OrderData[3] intValue] == 0){
         InsuranceText = [NSString stringWithFormat:@"%@: %@",[_db getPageItemTitle:@"orderInsurance"],[_db getPageItemTitle:@"orderInsuranceNot"]];
     }else{
-        InsuranceText = [NSString stringWithFormat:@"%@:%@元",[_db getPageItemTitle:@"orderInsurance"],[self formatNumerWithString:OrderData[3]]];
+        InsuranceText = [NSString stringWithFormat:@"%@: %@元",[_db getPageItemTitle:@"orderInsurance"],[self formatNumerWithString:OrderData[3]]];
     }
     return InsuranceText;
 }

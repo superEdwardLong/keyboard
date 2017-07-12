@@ -189,8 +189,8 @@
     if(orderId > 0){
     
         BoardDB *db = [BoardDB new];
-        NSString *sql = [NSString stringWithFormat:@"SELECT mail_from_uid,mail_to_uid,mail_package_type,mail_package_price,mail_pay_model From MailList WHERE mail_id = %ld",orderId];
-        NSMutableArray *rows = [[db FindWithSql:sql withReturnFields:@[@"mail_from_uid",@"mail_to_uid",@"mail_package_type",@"mail_package_price",@"mail_pay_model"]] lastObject];
+        NSString *sql = [NSString stringWithFormat:@"SELECT mail_from_uid,mail_to_uid,mail_package_type,mail_package_price,mail_pay_model,mail_order_id, From MailList WHERE mail_id = %ld",orderId];
+        NSMutableArray *rows = [[db FindWithSql:sql withReturnFields:@[@"mail_from_uid",@"mail_to_uid",@"mail_package_type",@"mail_package_price",@"mail_pay_model",@"mail_order_id"]] lastObject];
         
         NSInteger senderId,receiveId;
         senderId = [rows[0] integerValue];
@@ -227,6 +227,10 @@
             _right_flex.label_value.text = rows[4];
         }
         
+        
+        if([rows[5]length] >0){
+            _orderNumber = rows[5];
+        }
         _offset_x_right_button.constant =  0 - [[UIScreen mainScreen]bounds].size.width *2;
         _offset_x_left_button.constant =  0;
     }
