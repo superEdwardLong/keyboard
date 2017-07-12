@@ -28,7 +28,7 @@
 
 
 -(FMDatabase *)OpenDb{
-    int kCurrentVer = 12;
+    int kCurrentVer = 13;
     
     NSString *dbName = [NSString stringWithFormat:@"wordlib_ver_%d.db",kCurrentVer];
     NSURL *containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.bizopstech.keyboard"];
