@@ -434,7 +434,7 @@ typedef struct ARGBPixel{
     if([OrderData[3] intValue] == 0){
         InsuranceText = [NSString stringWithFormat:@"%@: %@",[_db getPageItemTitle:@"orderInsurance"],[_db getPageItemTitle:@"orderInsuranceNot"]];
     }else{
-        InsuranceText = [NSString stringWithFormat:@"%@: ¥%@",[_db getPageItemTitle:@"orderInsurance"],[self formatNumerWithString:OrderData[3]]];
+        InsuranceText = [NSString stringWithFormat:@"%@:%@元",[_db getPageItemTitle:@"orderInsurance"],[self formatNumerWithString:OrderData[3]]];
     }
     return InsuranceText;
 }
