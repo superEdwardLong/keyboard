@@ -113,10 +113,8 @@ typedef struct ARGBPixel{
                 [_btn_scan setTitle:@"打印运单" forState:UIControlStateNormal];
             }else{
                 
-                
                 _btn_scan.tag = 201;
-                [_btn_scan setTitle:@"扫描设备" forState:UIControlStateNormal];
-                
+                [_btn_scan setTitle:@"扫描设备" forState:UIControlStateNormal];                
             }
             
         }break;
