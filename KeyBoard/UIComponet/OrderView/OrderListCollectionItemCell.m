@@ -75,7 +75,7 @@
     }else{
         _label_order_insurance.text = [NSString stringWithFormat:@"%@: ¥%@",[db getPageItemTitle:@"orderInsurance"],[self formatNumerWithString:OrderData[9]]];
     }
-    _label_order_paymodel.text = [NSString stringWithFormat:@"%@: %@",[db getPageItemTitle:@"orderPayModel"],[OrderData lastObject]];
+    _label_order_paymodel.text = [NSString stringWithFormat:@"%@: %@",[db getPageItemTitle:@"orderPayModel"],OrderData[18]];
     
     NSString *ASSIGNTEXT;
     switch ([OrderData[7]integerValue]) {
