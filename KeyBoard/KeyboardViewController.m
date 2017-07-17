@@ -615,8 +615,6 @@ BasicBoardViewDelegate>
         phoneRange = NSMakeRange(NSNotFound, 0);
     }
     
-    
-    
     if(phoneRange.location == NSNotFound || phoneRange.location == 0 || phoneRange.location + phoneRange.length == address.length){
         //无电话，或 电话在前面 或 电话在 最后面
         //电话在两边，先过滤电话号码
