@@ -120,7 +120,7 @@
     [filter setDefaults];
     // 3.给过滤器添加数据(正则表达式/账号和密码)
     NSString*targetCityCode = cols[17];
-    if(targetCityCode.length > 2){
+    if(targetCityCode.length > 3){
         targetCityCode = [targetCityCode substringFromIndex:1];
     }
     NSMutableString *QRCodeString = [NSMutableString string];

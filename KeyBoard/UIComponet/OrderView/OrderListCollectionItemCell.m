@@ -144,7 +144,7 @@
      */
     
     NSString*targetCityCode = OrderData[19];
-    if(targetCityCode.length > 2){
+    if(targetCityCode.length > 3){
         targetCityCode = [targetCityCode substringFromIndex:1];
     }
     NSMutableString *QRCodeString = [NSMutableString string];

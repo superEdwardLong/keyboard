@@ -435,7 +435,7 @@ typedef struct ARGBPixel{
     if([OrderData[3] intValue] == 0){
         InsuranceText = [NSString stringWithFormat:@"%@: %@",[_db getPageItemTitle:@"orderInsurance"],[_db getPageItemTitle:@"orderInsuranceNot"]];
     }else{
-        InsuranceText = [NSString stringWithFormat:@"%@: %@元",[_db getPageItemTitle:@"orderInsurance"],[self formatNumerWithString:OrderData[3]]];
+        InsuranceText = [NSString stringWithFormat:@"%@: ￥%@",[_db getPageItemTitle:@"orderInsurance"],[self formatNumerWithString:OrderData[3]]];
     }
     return InsuranceText;
 }
@@ -489,7 +489,7 @@ typedef struct ARGBPixel{
         [filter setDefaults];
         // 3.给过滤器添加数据(正则表达式/账号和密码)
         NSString*targetCityCode = OrderData[17];
-        if(targetCityCode.length > 2){
+        if(targetCityCode.length > 3){
             targetCityCode = [targetCityCode substringFromIndex:1];
         }
         
@@ -507,7 +507,7 @@ typedef struct ARGBPixel{
 
 -(NSString*)GetQRCodeValue{
     NSString*targetCityCode = _PrintDataSource[17];
-    if(targetCityCode.length > 2){
+    if(targetCityCode.length > 3){
         targetCityCode = [targetCityCode substringFromIndex:1];
     }
     NSMutableString *QRCodeString = [NSMutableString string];

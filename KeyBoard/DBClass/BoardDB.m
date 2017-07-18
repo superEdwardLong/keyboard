@@ -14,6 +14,7 @@
 #define KCity       @"field_City"
 #define KAddress    @"field_Address"
 #define KImage    @"field_Image"
+#define KVersion  1
 
 #import "BoardDB.h"
 
@@ -26,11 +27,56 @@
     return self;
 }
 
++(BOOL)CheckDbVersion{
+    NSString *dbName = [NSString stringWithFormat:@"wordlib_ver_%d.db",KVersion];
+    NSURL *containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.bizopstech.keyboard"];
+    NSString *db_path = [containerURL.path stringByAppendingPathComponent:dbName];
+    BOOL isExist = [[NSFileManager defaultManager] fileExistsAtPath:db_path];
+    BOOL isSuccess = YES;
+    
+    if(isExist == NO){
+        ///// 如果新版本数据库不存在，且不是第一个版本，删除就版本数据库
+        if(KVersion > 1){
+            NSString *oldDbName,*old_db_path;
+            for(int i=1; i< KVersion;i++){
+                oldDbName = [NSString stringWithFormat:@"wordlib_ver_%d.db",i];
+                old_db_path = [containerURL.path stringByAppendingPathComponent:oldDbName];
+                BOOL subIsExist = [[NSFileManager defaultManager] fileExistsAtPath:old_db_path];
+                if(subIsExist){
+                    BOOL DELSuccess = [[NSFileManager defaultManager] removeItemAtPath:old_db_path error:nil];
+                    if (DELSuccess) {
+                        NSLog(@"数据库 wordlib_ver_%d 删除成功",i);
+                    }else{
+                        NSLog(@"数据库 wordlib_ver_%d 删除失败",i);
+                    }
+                }
+            }
+        }
+        
+        ////创建新版本数据库
+        NSString *source_path = [[NSBundle mainBundle]pathForResource:@"wordlib" ofType:@"db"];
+        isSuccess = [[NSFileManager defaultManager] copyItemAtPath:source_path toPath:db_path error:nil];
+        
+        if (isSuccess) {
+            NSLog(@"新版本数据库复制成功");
+        }else{
+            NSLog(@"新版本数据库复制失败");
+        }
+        
+    }
+    else{
+        NSLog(@"这个版本的数据库已经存在");
+    }
+    
+    
+    return isSuccess;
+}
+
 
 -(FMDatabase *)OpenDb{
-    int kCurrentVer = 20;
     
-    NSString *dbName = [NSString stringWithFormat:@"wordlib_ver_%d.db",kCurrentVer];
+    
+    NSString *dbName = [NSString stringWithFormat:@"wordlib_ver_%d.db",KVersion];
     NSURL *containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.bizopstech.keyboard"];
     NSString *db_path = [containerURL.path stringByAppendingPathComponent:dbName];
     
