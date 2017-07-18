@@ -30,7 +30,6 @@ BasicBoardViewDelegate>
 //启动图片编辑时需要用到
 @property(nonatomic,retain)UIImageView* editContactImageView;
 
-
 //候选词数据
 @property(nonatomic,retain)NSMutableArray *WordsArr;
 @property(nonatomic,assign)int WordsPage;
@@ -614,8 +613,6 @@ BasicBoardViewDelegate>
     }else{
         phoneRange = NSMakeRange(NSNotFound, 0);
     }
-    
-    
     
     if(phoneRange.location == NSNotFound || phoneRange.location == 0 || phoneRange.location + phoneRange.length == address.length){
         //无电话，或 电话在前面 或 电话在 最后面
