@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger,OrderState) {
     OrderStateCanceled = 3
 };
 @interface BoardDB : NSObject
-
++(BOOL)CheckDbVersion;
 -(NSMutableArray*)FindWithSql:(NSString*)sql withReturnFields:(id)fields;
 
 //查找联系人
