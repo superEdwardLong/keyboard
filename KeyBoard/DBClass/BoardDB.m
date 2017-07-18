@@ -85,10 +85,10 @@
     
     if ([db open] == YES){
         
-       // NSLog(@"数据库已打开");
+        NSLog(@"数据库已打开");
     }else{
         
-       // NSLog(@"数据库打开失败");
+        NSLog(@"数据库打开失败");
         db = nil;
     }
     
