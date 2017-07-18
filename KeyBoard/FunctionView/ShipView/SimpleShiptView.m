@@ -189,7 +189,7 @@
     if(orderId > 0){
     
         BoardDB *db = [BoardDB new];
-        NSString *sql = [NSString stringWithFormat:@"SELECT mail_from_uid,mail_to_uid,mail_package_type,mail_package_price,mail_pay_model,mail_order_id, From MailList WHERE mail_id = %ld",orderId];
+        NSString *sql = [NSString stringWithFormat:@"SELECT mail_from_uid,mail_to_uid,mail_package_type,mail_package_price,mail_pay_model,mail_order_id From MailList WHERE mail_id = %ld",orderId];
         NSMutableArray *rows = [[db FindWithSql:sql withReturnFields:@[@"mail_from_uid",@"mail_to_uid",@"mail_package_type",@"mail_package_price",@"mail_pay_model",@"mail_order_id"]] lastObject];
         
         NSInteger senderId,receiveId;
