@@ -30,7 +30,6 @@ BasicBoardViewDelegate>
 //启动图片编辑时需要用到
 @property(nonatomic,retain)UIImageView* editContactImageView;
 
-
 //候选词数据
 @property(nonatomic,retain)NSMutableArray *WordsArr;
 @property(nonatomic,assign)int WordsPage;
