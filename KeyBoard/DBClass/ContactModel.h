@@ -28,5 +28,5 @@
 @property(nonatomic,copy)NSString *mailPayModel;
 @property(nonatomic,copy)NSString *mailNumber;
 @property(nonatomic,copy)NSString *mailCreateTime;
-
+@property(nonatomic,copy)NSString *mailDescription;
 @end

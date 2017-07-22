@@ -229,6 +229,9 @@
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"== 获取成功:%@ ==",responseObject);
         BoardDB *db = [BoardDB new];
+        //读取默认发件人
+        ContactModel*DefaultSender = [db getDefaultSender];
+        
         NSArray*list = [responseObject objectForKey:@"list"];
         for(NSInteger i=0; i< list.count; i++){
             ContactModel*itemAddress = [ContactModel new];
@@ -237,7 +240,21 @@
             itemAddress.strProv = [list[i] objectForKey:@"user_provice"];
             itemAddress.strCity = [list[i] objectForKey:@"user_city"];
             itemAddress.strAddress = [NSString stringWithFormat:@"%@%@",[list[i] objectForKey:@"user_district"],[list[i] objectForKey:@"user_address"]];
+            
+            //导入到地址薄
             [db UpdateContact:itemAddress];
+            
+            //如果有默认发件人 -> 导入到运单
+            if(DefaultSender){
+                MailItemModel*mailItem = [MailItemModel new];
+                mailItem.mailDescription = [NSString stringWithFormat:@"%@\n%@ X%@",
+                                            [list[i] objectForKey:@"user_account"],
+                                            [list[i] objectForKey:@"user_productName"],
+                                            [list[i] objectForKey:@"user_buyCount"]
+                                            ];
+                [db UpdateMailList:mailItem withSender:DefaultSender withReceive:itemAddress];
+            }
+            
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"=== 获取失败 ===");

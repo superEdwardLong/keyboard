@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIView *col_2;
 @property (weak, nonatomic) IBOutlet UILabel *label_order_paymodel;
 @property (weak, nonatomic) IBOutlet UILabel *label_order_insurance;
+@property (weak, nonatomic) IBOutlet UILabel *label_order_description;
 @property(nonatomic,retain)BoardDB *db;
 @property(nonatomic,retain)NSArray *PrintDataSource;
 
@@ -249,12 +250,18 @@ typedef struct ARGBPixel{
     NSString*StrOrderPayModel = [NSString stringWithFormat:@"%@: %@",[_db getPageItemTitle:@"orderPayModel"],_PrintDataSource[4]];
     
     NSString*StrOrderInsured = [self TrimString:[self GetInsuranceText:_PrintDataSource]];
+    NSString*StrOrderDescription = [NSString stringWithFormat:@"运单备注: %@",_PrintDataSource[18]];
+    
+    
+    
     
     NSData *OrderNumber = [StrOrderNumber dataUsingEncoding:enc];
     NSData *OrderTime = [StrOrderTime dataUsingEncoding:enc];
     
     NSData *OrderPayModel = [StrOrderPayModel dataUsingEncoding:enc];
     NSData *OrderInsured = [StrOrderInsured dataUsingEncoding:enc];
+    
+    NSData *OrderDescription = [StrOrderDescription dataUsingEncoding:enc];
     
     
     //    初始化打印机
@@ -284,7 +291,7 @@ typedef struct ARGBPixel{
     NSData *dataEnd = [NSData dataWithBytes: end length: sizeof(end)];
     
     //进纸
-    Byte line[] = {0x1B,0X64,4};
+    Byte line[] = {0x1B,0X64,2};
     NSData *dataLine = [NSData dataWithBytes: line length: sizeof(line)];
     
     //箭头
@@ -378,6 +385,10 @@ typedef struct ARGBPixel{
     [printData appendData:OrderInsured];
     [printData appendData:data1];//换行
     
+    [printData appendData:OrderDescription];
+    [printData appendData:data1];//换行
+    
+    
     [printData appendData:dataLine];//进纸
     [printData appendData:dataEnd];//结束打印
     
@@ -464,7 +475,9 @@ typedef struct ARGBPixel{
                                                                    @"mail_to_address",      //-----------------> 14
                                                                    @"mail_assign_time",
                                                                    @"mail_state",
-                                                                   @"mail_to_targetNumber"]] firstObject];
+                                                                   @"mail_to_targetNumber", //-----------------> 17
+                                                                   @"mail_description"      //-----------------> 18
+                                                                   ]] firstObject];
     _PrintDataSource = OrderData;
     if(OrderData.count > 0){
         
@@ -481,6 +494,8 @@ typedef struct ARGBPixel{
         _label_order_assing.text = [self GetAssignText:OrderData];
         _label_order_insurance.text = [self GetInsuranceText:OrderData];
         
+        _label_order_description.text = OrderData[18];
+        [_label_order_description sizeToFit];
         
         
         ///组装数据生成QRCodeImage
@@ -514,7 +529,7 @@ typedef struct ARGBPixel{
     [QRCodeString appendString:@"IOS.APP|ZNZD-13|"];
     [QRCodeString appendString:@"T4"];//产品
     [QRCodeString appendString:@"|"];
-    [QRCodeString appendString:@"1.5"];//重量
+    [QRCodeString appendString:@"1"];//重量
     [QRCodeString appendString:@"|"];
     [QRCodeString appendString:_PrintDataSource[4]];//支付模式
     [QRCodeString appendString:@"||1|"];

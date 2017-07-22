@@ -63,6 +63,7 @@
         _mailPayModel = @"寄付现结";
         _mailPackagePrice = 0;
         _mailPackageType = @"文件";
+        _mailDescription = @"";
     }
     return self;
 }

@@ -131,7 +131,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I6A-St-vhH" userLabel="PrintInfo">
-                                <rect key="frame" x="67.5" y="138.5" width="240" height="390"/>
+                                <rect key="frame" x="67.5" y="118.5" width="240" height="430"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vA6-eh-wWY">
                                         <rect key="frame" x="30" y="20" width="180" height="180"/>
@@ -199,6 +199,12 @@
                                         <color key="textColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预约时间：2017-05-24 18:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wkc-ic-fEJ" userLabel="label-assign">
+                                        <rect key="frame" x="28.5" y="306.5" width="180" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="付款方式" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yEd-aS-dUm">
                                         <rect key="frame" x="30" y="328" width="180" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -211,15 +217,23 @@
                                         <color key="textColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预约时间：2017-05-24 18:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wkc-ic-fEJ" userLabel="label-assign">
-                                        <rect key="frame" x="29" y="307" width="180" height="16"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="运单备注:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PC3-vf-GAt" userLabel="OrderDescriptionTitle">
+                                        <rect key="frame" x="30" y="370" width="60" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="运单备注" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S2n-6d-vs4" userLabel="OrderDescriptionLabel">
+                                        <rect key="frame" x="90" y="370" width="119" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="390" id="0P3-9m-iTv"/>
+                                    <constraint firstAttribute="height" constant="430" id="0P3-9m-iTv"/>
                                     <constraint firstItem="yEd-aS-dUm" firstAttribute="width" secondItem="eCY-fT-RRR" secondAttribute="width" id="156-ku-TSe"/>
                                     <constraint firstItem="yEd-aS-dUm" firstAttribute="leading" secondItem="I6A-St-vhH" secondAttribute="leading" constant="30" id="4Bw-wm-G0d"/>
                                     <constraint firstItem="eCY-fT-RRR" firstAttribute="leading" secondItem="I6A-St-vhH" secondAttribute="leading" constant="29.5" id="9Mq-6A-GnC"/>
@@ -271,6 +285,7 @@
                         <outlet property="btn_scan" destination="iUz-8o-SoX" id="AdA-hJ-qc7"/>
                         <outlet property="col_2" destination="9WL-CW-QKL" id="VQh-9D-4iW"/>
                         <outlet property="label_order_assing" destination="wkc-ic-fEJ" id="ew8-gB-4GM"/>
+                        <outlet property="label_order_description" destination="S2n-6d-vs4" id="heb-Pv-990"/>
                         <outlet property="label_order_insurance" destination="e6N-im-EeC" id="CB8-wA-5Ax"/>
                         <outlet property="label_order_number" destination="eCY-fT-RRR" id="md8-t2-8HD"/>
                         <outlet property="label_order_paymodel" destination="yEd-aS-dUm" id="77e-Vk-66d"/>

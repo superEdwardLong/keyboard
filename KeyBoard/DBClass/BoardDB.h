@@ -48,6 +48,8 @@ typedef NS_ENUM(NSInteger,OrderState) {
 
 -(NSString*)getCityCode:(NSString*)cityName;
 
+-(ContactModel*)getDefaultSender;
+
 /* =====================================
  获取语言版本
  ===================================== */

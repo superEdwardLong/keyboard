@@ -14,7 +14,7 @@
 #define KCity       @"field_City"
 #define KAddress    @"field_Address"
 #define KImage    @"field_Image"
-#define KVersion  1
+#define KVersion  2
 
 #import "BoardDB.h"
 
@@ -147,6 +147,27 @@
     return arr;
 }
 
+-(ContactModel*)getDefaultSender{
+    ContactModel *item;
+    FMDatabase *db = [self OpenDb];
+    if(db){
+        FMResultSet *s = [db executeQuery:@"SELECT * FROM Contacts WHERE isDefaultSender = 1"];
+        while ([s next]){
+            item = [ContactModel new];
+            item.contactId = [s longForColumn:@"id"];
+            item.strName = [s stringForColumn:@"name"];
+            item.strPhone = [s stringForColumn:@"phone"];
+            item.strProv = [s stringForColumn:@"prov"];
+            item.strCity = [s stringForColumn:@"city"];
+            item.strAddress = [s stringForColumn:@"address"];
+            item.strImage = [s stringForColumn:@"image"];
+            item.isDefaultSender = [s longForColumn:@"isDefaultSender"];
+            break;
+        }
+        [db close];
+    }
+    return item;
+}
 
 //查找联系人
 -(NSMutableArray*)FindContactsWithFilter:(NSNumber*)strFilter{
@@ -311,9 +332,9 @@
     NSInteger updateId = 0;
     
     if(MailItem.mailId == 0){
-        sql = @"INSERT INTO MailList (mail_order_id,mail_package_type,mail_package_price,mail_pay_model,mail_from_user,mail_from_phone,mail_from_province,mail_from_city,mail_from_address,mail_to_user,mail_to_phone,mail_to_province,mail_to_city,mail_to_address,mail_create_time,mail_from_uid,mail_to_uid,mail_to_targetNumber) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        sql = @"INSERT INTO MailList (mail_order_id,mail_package_type,mail_package_price,mail_pay_model,mail_from_user,mail_from_phone,mail_from_province,mail_from_city,mail_from_address,mail_to_user,mail_to_phone,mail_to_province,mail_to_city,mail_to_address,mail_create_time,mail_from_uid,mail_to_uid,mail_to_targetNumber,mail_description) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         
-        result = [db executeUpdate:sql,MailItem.mailNumber,MailItem.mailPackageType,[NSNumber numberWithFloat:MailItem.mailPackagePrice],MailItem.mailPayModel,Sender.strName,Sender.strPhone,Sender.strProv,Sender.strCity,Sender.strAddress,Receive.strName,Receive.strPhone,Receive.strProv,Receive.strCity,Receive.strAddress,MailItem.mailCreateTime,[NSNumber numberWithInteger:Sender.contactId],[NSNumber numberWithInteger:Receive.contactId],MailToTargetNumber];
+        result = [db executeUpdate:sql,MailItem.mailNumber,MailItem.mailPackageType,[NSNumber numberWithFloat:MailItem.mailPackagePrice],MailItem.mailPayModel,Sender.strName,Sender.strPhone,Sender.strProv,Sender.strCity,Sender.strAddress,Receive.strName,Receive.strPhone,Receive.strProv,Receive.strCity,Receive.strAddress,MailItem.mailCreateTime,[NSNumber numberWithInteger:Sender.contactId],[NSNumber numberWithInteger:Receive.contactId],MailToTargetNumber,MailItem.mailDescription];
         
         FMResultSet *r = [db executeQuery:@"SELECT max(mail_id) FROM MailList"];
         while ([r next]){
@@ -321,8 +342,8 @@
         }
     }else{
         updateId = MailItem.mailId;
-        sql = @"UPDATE MailList SET mail_order_id = ?,mail_package_type = ?,mail_package_price = ?,mail_pay_model = ?,mail_from_user = ?,mail_from_phone = ?,mail_from_province = ?,mail_from_city = ?,mail_from_address = ?,mail_to_user = ?,mail_to_phone = ?,mail_to_province = ?,mail_to_city = ?,mail_to_address = ?,mail_to_targetNumber= ?  WHERE mail_id = ?";
-        result = [db executeUpdate:sql,MailItem.mailNumber,MailItem.mailPackageType,[NSNumber numberWithFloat:MailItem.mailPackagePrice],MailItem.mailPayModel,Sender.strName,Sender.strPhone,Sender.strProv,Sender.strCity,Sender.strAddress,Receive.strName,Receive.strPhone,Receive.strProv,Receive.strCity,Receive.strAddress,MailToTargetNumber,[NSNumber numberWithInteger:MailItem.mailId]];
+        sql = @"UPDATE MailList SET mail_order_id = ?,mail_package_type = ?,mail_package_price = ?,mail_pay_model = ?,mail_from_user = ?,mail_from_phone = ?,mail_from_province = ?,mail_from_city = ?,mail_from_address = ?,mail_to_user = ?,mail_to_phone = ?,mail_to_province = ?,mail_to_city = ?,mail_to_address = ?,mail_to_targetNumber= ?,mail_description=?  WHERE mail_id = ?";
+        result = [db executeUpdate:sql,MailItem.mailNumber,MailItem.mailPackageType,[NSNumber numberWithFloat:MailItem.mailPackagePrice],MailItem.mailPayModel,Sender.strName,Sender.strPhone,Sender.strProv,Sender.strCity,Sender.strAddress,Receive.strName,Receive.strPhone,Receive.strProv,Receive.strCity,Receive.strAddress,MailToTargetNumber,MailItem.mailDescription,[NSNumber numberWithInteger:MailItem.mailId]];
     }
     return updateId;
 }
